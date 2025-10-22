@@ -1,13 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:news_c16/api/model/resonse/articles/Articles.dart';
 import 'package:news_c16/core/resources/app_const/app_color.dart';
 
-import '../../../data/models/article_model.dart';
 
 class NewsCard extends StatelessWidget {
   const NewsCard({super.key, required this.articleModel});
-  final ArticleModel articleModel;
+  final Article articleModel;
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +25,9 @@ class NewsCard extends StatelessWidget {
         aspectRatio: 16 / 9,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(8),
-          child: (articleModel.image != null && articleModel.image!.isNotEmpty)
+          child: (articleModel.urlToImage != null && articleModel.urlToImage!.isNotEmpty)
               ? CachedNetworkImage(
-            imageUrl: articleModel.image!,
+            imageUrl: articleModel.urlToImage!,
             width: double.infinity,
             fit: BoxFit.cover,
             progressIndicatorBuilder: (context, url, downloadProgress) =>
@@ -64,9 +64,10 @@ class NewsCard extends StatelessWidget {
             children: [
               Text('By : ${articleModel.author}'),
               Text(
-                DateFormat(
-                  'EEE, MMM d',
-                ).format(articleModel.dateTime ?? DateTime.now()),
+                articleModel.publishedAt ?? ""
+                // DateFormat(
+                //   'EEE, MMM d',
+                // ).format(articleModel.dateTime ?? DateTime.now()
               ),
             ],
           ),
