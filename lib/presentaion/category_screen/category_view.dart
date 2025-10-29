@@ -3,13 +3,17 @@ import 'package:news_c16/core/resources/widgets/custom_scaffold.dart';
 import 'package:news_c16/data/models/category_model.dart';
 import 'package:news_c16/presentaion/category_screen/widgets/category_card.dart';
 
+typedef OnCategoryClick = void Function(CategoryModel category);
+
+
 class CategoryView extends StatelessWidget {
-  const CategoryView({super.key});
+
+  OnCategoryClick onCategoryClick;
+  CategoryView(this.onCategoryClick,{super.key});
 
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-      title: 'Home',
+    return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -20,7 +24,11 @@ class CategoryView extends StatelessWidget {
           Expanded(
             child: ListView.separated(itemBuilder: (context, index) {
              var category =  CategoryModel.categories[index];
-            return CategoryCard(model: category, index: index,);
+            return InkWell(
+                onTap: () {
+                  onCategoryClick(category);
+                },
+                child: CategoryCard(model: category, index: index,));
             }, separatorBuilder: (context, index) => SizedBox(height: 10,), itemCount: CategoryModel.categories.length),
           )
         ]),

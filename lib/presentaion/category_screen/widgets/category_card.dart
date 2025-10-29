@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_c16/core/resources/app_const/app_routes.dart';
 import 'package:news_c16/data/models/category_model.dart';
 
 class CategoryCard extends StatelessWidget {
@@ -13,13 +14,23 @@ class CategoryCard extends StatelessWidget {
         ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: Image.asset(model.image??'')),
+         Positioned(
+             top: 24,
+             right:index.isEven ? 24 : null,
+             left: index.isOdd ? 24 : null,
+             child: Text(model.title ??"" ,style:  TextStyle(fontSize: 32,
+             color: Colors.black,
+             fontWeight: FontWeight.w700),)),
+
         Positioned(
             bottom: 10,
             right:index.isEven ? 10 : null,
             left: index.isOdd ? 10 : null,
             child: Container(
+              padding: EdgeInsets.symmetric(vertical: 6,horizontal: 12),
                 decoration: BoxDecoration(
-
+                  borderRadius: BorderRadius.circular(36),
+                  color: Colors.black.withAlpha(124),
                 ),
                 child: Text('View All ',style:  TextStyle(fontSize: 25),)))
       ],

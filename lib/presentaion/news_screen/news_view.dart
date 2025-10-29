@@ -2,24 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:news_c16/api/ApiManager.dart';
 import 'package:news_c16/core/resources/widgets/custom_scaffold.dart';
+import 'package:news_c16/data/models/category_model.dart';
 import 'package:news_c16/presentaion/news_screen/NewsSources.dart';
 
 class NewsView extends StatelessWidget {
-  const NewsView({super.key});
+  CategoryModel category;
+  NewsView(this.category,{super.key});
 
 
   @override
   Widget build(BuildContext context) {
-    ;
-    return CustomScaffold(
-      title: 'sport',
-      actions: [
-        IconButton(onPressed: () {
-          // todo navigate to search screen
-        }, icon: Icon(Icons.search))
-      ],
+    return Scaffold(
       body: FutureBuilder(future: ApiManager.getInstance()
-          .getNewsSources("sports"), builder: (context, snapshot) {
+          .getNewsSources(category.id ?? ""), builder: (context, snapshot) {
         if(snapshot.connectionState == ConnectionState.waiting){
           return Center(child: CircularProgressIndicator(),);
         }

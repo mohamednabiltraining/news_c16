@@ -6,11 +6,11 @@ import 'package:provider/provider.dart';
 import '../../providers/theme_provider.dart';
 
 class CustomScaffold extends StatefulWidget {
-  const CustomScaffold({super.key, this.title, this.actions, required this.body});
+  const CustomScaffold(this.onHomeClick,{super.key, this.title, this.actions, required this.body,});
   final String? title ;
   final List<Widget>? actions;
   final Widget body;
-
+  final VoidCallback onHomeClick;
 
   @override
   State<CustomScaffold> createState() => _CustomScaffoldState();
@@ -36,7 +36,9 @@ class _CustomScaffoldState extends State<CustomScaffold> {
             DrawerHeader(child: Center(child: Text('News App'))),
             ListTile(
               onTap: () {
-                Navigator.pushNamed(context, AppRoutes.categoryRoute);
+                widget.onHomeClick();
+                // close drawer
+                Navigator.pop(context);
               },
               title: Text('Go to Home '),
 
@@ -49,7 +51,7 @@ class _CustomScaffoldState extends State<CustomScaffold> {
                     ? ThemeMode.light
                     : ThemeMode.dark;
               },
-
+              title: Text(themeProvider.isDark ? "Dark" : "Light"),
               leading: Icon(themeProvider.isDark? Icons.dark_mode:Icons.light_mode),
             ),
             // Padding(

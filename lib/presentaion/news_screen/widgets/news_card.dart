@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:news_c16/api/model/resonse/articles/Articles.dart';
+import 'package:news_c16/core/extensions/DateFomatsExtensions.dart';
 import 'package:news_c16/core/resources/app_const/app_color.dart';
 
 
@@ -62,12 +63,14 @@ class NewsCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('By : ${articleModel.author}'),
-              Text(
-                articleModel.publishedAt ?? ""
-                // DateFormat(
-                //   'EEE, MMM d',
-                // ).format(articleModel.dateTime ?? DateTime.now()
+              Expanded(child: Text('By : ${articleModel.author}',
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,)),
+              Expanded(
+                child: Text(
+                  articleModel.publishedAt?.formatArticleDate() ?? "",
+                  textAlign: TextAlign.end,
+                ),
               ),
             ],
           ),

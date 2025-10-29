@@ -3,6 +3,7 @@ import 'package:news_c16/core/providers/theme_provider.dart';
 import 'package:news_c16/core/resources/app_const/app_routes.dart';
 import 'package:news_c16/core/resources/app_const/app_theme.dart';
 import 'package:news_c16/presentaion/category_screen/category_view.dart';
+import 'package:news_c16/presentaion/home/home_screen.dart';
 import 'package:news_c16/presentaion/news_screen/news_view.dart';
 import 'package:provider/provider.dart';
 
@@ -29,13 +30,10 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: themeProvider.getTheme,
-
       routes: {
-        AppRoutes.newsRoute: (_) => NewsView(),
-        AppRoutes.categoryRoute: (_) => CategoryView(),
-
+        AppRoutes.HomeScreen: (_) => HomeScreen(),
       },
-      initialRoute: AppRoutes.newsRoute,
+      initialRoute: AppRoutes.HomeScreen,
     );
   }
 }
